@@ -257,6 +257,22 @@
                                 }
                             }
                         }
+                        function clearCanvas() {
+
+                            ctx.clearRect(0, 0, width, height);
+
+                            let currentR =
+                                document.getElementById("inputForm:r").value;
+
+                            updateGraph(currentR);
+                        }
+
+                        function handleClearAjax(data) {
+
+                            if (data.status === "success") {
+                                clearCanvas();
+                            }
+                        }
 
                         function rewritePoints(currentR) {
                             const table = document.getElementById('inputForm:resultsTable');
@@ -370,7 +386,8 @@
                 <!-- Кнопка стерка -->
                 <h:commandButton value="Очистить результаты"
                                  actionListener="#{resultsBean.clearResults}">
-                    <f:ajax render="resultsTable"/>
+                    <f:ajax render="resultsTable"
+                    onevent="handleClearAjax"/>
                 </h:commandButton>
 
                 <!-- Таблица со списком результатов предыдущих проверок. -->
