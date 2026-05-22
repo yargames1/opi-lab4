@@ -39,4 +39,10 @@ public class PointStats extends NotificationBroadcasterSupport
     public int getMissPoints() {
         return missPoints;
     }
+
+    @Override
+    public synchronized void reset() {
+        totalPoints = 0;
+        missPoints = 0;
+    }
 }

@@ -40,6 +40,7 @@ public class ResultsBean implements Serializable {
     public void clearResults() {
         repository.deleteAll();
         results.clear();
+        mBeanConfig.getPointStats().reset();
     }
 
     public List<PointResult> getResults() {
