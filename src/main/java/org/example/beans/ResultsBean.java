@@ -1,5 +1,7 @@
 package org.example.beans;
 
+import org.example.mbeans.MBeanConfig;
+
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
@@ -26,9 +28,13 @@ public class ResultsBean implements Serializable {
         }
     }
 
+    @Inject
+    private MBeanConfig mBeanConfig;
+
     public void addResult(PointResult result) {
         PointResult saved = repository.save(result);
         results.add(0, saved);
+        mBeanConfig.getPointStats().addPoint(saved.getHit());
     }
 
     public void clearResults() {
